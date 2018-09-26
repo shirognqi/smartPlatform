@@ -19,7 +19,7 @@ public class FileUtils {
             BufferedReader bufIn = new BufferedReader(in);
             String line = null;
             while ( (line = bufIn.readLine()) != null) {
-                if(line.replaceAll("\r|[ ]","").equals("packagecom.smartplatform.smartplatform.OriSource.helloWorld")){
+                if(line.replaceAll("\r|[ ]","").equals("packagecom.tencent.smartplatform.GroovySourceScript.helloWorld")){
                     line = "\n";
                 }else {
                     line = line + "\n";

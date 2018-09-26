@@ -29,8 +29,8 @@ public class StartService {
             String actionName       = "helloWorld";
 
 
-            String actionDir        = "smart-platform/src/main/java/com/tencent/smartplatform/GroovyAimScript/"+actionName+"/";
-            String oriActionDir     = "smart-platform/src/main/java/com/tencent/smartplatform/GroovySourceScript/"+actionName+"/";
+            String actionDir        = "src/main/java/com/tencent/smartplatform/GroovyAimScript/"+actionName+"/";
+            String oriActionDir     = "src/main/java/com/tencent/smartplatform/GroovySourceScript/"+actionName+"/";
             String actionInitFile   = actionDir + "init.groovy";
             String actionFile       = actionDir + "main.groovy";
 
