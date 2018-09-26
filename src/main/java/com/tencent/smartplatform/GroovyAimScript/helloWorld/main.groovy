@@ -1,0 +1,2 @@
+package com.tencent.smartplatform.GroovyAimScript.helloWorld
+return 123
