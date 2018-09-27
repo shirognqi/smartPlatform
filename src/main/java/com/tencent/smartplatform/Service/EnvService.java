@@ -3,12 +3,17 @@ package com.tencent.smartplatform.Service;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisPool;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-
+@Service
 public class EnvService {
+
+    private String envStr;
 
     private  Cache<String, ComboPooledDataSource> mySQLPool = CacheBuilder.newBuilder().maximumSize(1000).recordStats().build();
     private  Cache<String, JedisPool> redisPool = CacheBuilder.newBuilder().maximumSize(1000).recordStats().build();
@@ -61,7 +66,12 @@ public class EnvService {
         cleanMySQLPool();
     }
 
-
+    public void setEnvStr(String envStr){
+        this.envStr = envStr;
+    }
+    public String getEnvStr(){
+        return this.envStr;
+    }
 
 
 }

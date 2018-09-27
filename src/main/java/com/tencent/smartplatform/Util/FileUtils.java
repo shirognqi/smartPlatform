@@ -13,13 +13,14 @@ public class FileUtils {
         File inFile = null;
         File outFile = new File(targetFileName);
         FileOutputStream out = new FileOutputStream(outFile);
+        out.write("package GroovyAimScript.helloWorld\n".getBytes());
         for (String str:fileNames) {
             inFile = new File(str);
             FileReader in = new FileReader(inFile);
             BufferedReader bufIn = new BufferedReader(in);
             String line = null;
             while ( (line = bufIn.readLine()) != null) {
-                if(line.replaceAll("\r|[ ]","").equals("packagecom.tencent.smartplatform.GroovySourceScript.helloWorld")){
+                if(line.replaceAll("\r|[ ]","").equals("packageGroovySourceScript.helloWorld")){
                     line = "\n";
                 }else {
                     line = line + "\n";

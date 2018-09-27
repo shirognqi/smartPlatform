@@ -7,6 +7,7 @@ import groovy.lang.Script;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import static com.tencent.smartplatform.Util.TimeUtils.getCurrentTime;
 
 @Service
 public class StartService {
+    @Value(value = "${envStr}")
+    private String envStr;
 
     public Object ScriptRun(HttpServletRequest request, HttpServletResponse response) throws ResourceException, ScriptException, IOException {
         try {
@@ -29,8 +32,10 @@ public class StartService {
             String actionName       = "helloWorld";
 
 
-            String actionDir        = "src/main/java/com/tencent/smartplatform/GroovyAimScript/"+actionName+"/";
-            String oriActionDir     = "src/main/java/com/tencent/smartplatform/GroovySourceScript/"+actionName+"/";
+//            String actionDir        = "src/main/java/com/tencent/smartplatform/GroovyAimScript/"+actionName+"/";
+//            String oriActionDir     = "src/main/java/com/tencent/smartplatform/GroovySourceScript/"+actionName+"/";
+            String actionDir        = "src/main/resources/GroovyAimScript/"+actionName+"/";
+            String oriActionDir     = "src/main/resources/GroovySourceScript/"+actionName+"/";
             String actionInitFile   = actionDir + "init.groovy";
             String actionFile       = actionDir + "main.groovy";
 
@@ -83,6 +88,7 @@ public class StartService {
             try {
                 // 初始化配置
                 EnvService envService = new EnvService();
+                envService.setEnvStr(envStr);
                 Binding initBinding = new Binding();
                 initBinding.setVariable("env", envService);
                 GroovyScriptEngine engine = new GroovyScriptEngine(actionDir);
@@ -103,6 +109,7 @@ public class StartService {
                 }
                 Binding initBinding = new Binding();
                 initBinding.setVariable("env", envService);
+                envService.setEnvStr(envStr);
                 GroovyScriptEngine engine = new GroovyScriptEngine(actionDir);
                 engine.run("init.groovy", initBinding);
                 putEnv(actionName, envService);
