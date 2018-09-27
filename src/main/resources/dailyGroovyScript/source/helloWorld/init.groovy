@@ -1,4 +1,4 @@
-package testasdf
+package dailyGroovyScript.source.helloWorld
 
 import com.tencent.smartplatform.Util.Bean.MySQLConfig
 import com.tencent.smartplatform.Util.Bean.RedisConfig

@@ -1,5 +1,4 @@
-package com.tencent.smartplatform.GroovySourceScript.helloWorld
-
+package dailyGroovyScript.source.helloWorld
 import com.tencent.smartplatform.Service.EnvService
 
 
@@ -10,7 +9,7 @@ def ret = DailyJob.instance.doSomeWork(env)
 def otherJob = TestAddJob6.instance.doOtherJob(env)
 ret["otherJob"] = otherJob
 ret["aaaaaaaa"] = "hello, smart platform"
-
+ret["envStr"] = env.getEnvStr()
 
 
 

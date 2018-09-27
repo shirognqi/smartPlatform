@@ -23,6 +23,32 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
+    <profiles>
+        <!-- 日常环境 -->
+        <profile>
+            <id>daily</id>
+            <properties>
+                <profiles.envStr>daily</profiles.envStr>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!-- 预发环境 -->
+        <profile>
+            <id>prepub</id>
+            <properties>
+                <profiles.envStr>prepub</profiles.envStr>
+            </properties>
+        </profile>
+        <!-- 线上环境 -->
+        <profile>
+            <id>online</id>
+            <properties>
+                <profiles.envStr>online</profiles.envStr>
+            </properties>
+        </profile>
+    </profiles>
 
 	<dependencies>
 		<dependency>
@@ -85,7 +111,7 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+        <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

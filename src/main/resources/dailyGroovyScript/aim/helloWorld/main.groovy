@@ -1,4 +1,4 @@
-
+package dailyGroovyScript.aim.helloWorld
 
 import com.tencent.smartplatform.Service.EnvService
 
@@ -10,7 +10,7 @@ def ret = DailyJob.instance.doSomeWork(env)
 def otherJob = TestAddJob6.instance.doOtherJob(env)
 ret["otherJob"] = otherJob
 ret["aaaaaaaa"] = "hello, smart platform"
-
+ret["envStr"] = env.getEnvStr()
 
 
 
@@ -27,7 +27,6 @@ ret["aaaaaaaa"] = "hello, smart platform"
 //}
 
 return ret
-
 
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import com.tencent.smartplatform.Service.EnvService

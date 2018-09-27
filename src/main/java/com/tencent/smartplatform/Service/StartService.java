@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.tencent.smartplatform.Util.FileUtils.uniteFile;
+import static com.tencent.smartplatform.Util.FileUtils.uniteSourceFile;
 import static com.tencent.smartplatform.Util.LocalCache.*;
 import static com.tencent.smartplatform.Util.TimeUtils.getCurrentTime;
 
@@ -32,11 +32,9 @@ public class StartService {
             String actionName       = "helloWorld";
 
 
-//            String actionDir        = "src/main/java/com/tencent/smartplatform/GroovyAimScript/"+actionName+"/";
-//            String oriActionDir     = "src/main/java/com/tencent/smartplatform/GroovySourceScript/"+actionName+"/";
             String actionDir        = "src/main/resources/GroovyAimScript/"+actionName+"/";
             String oriActionDir     = "src/main/resources/GroovySourceScript/"+actionName+"/";
-            String actionInitFile   = actionDir + "init.groovy";
+            String actionInitFile   = oriActionDir + "init.groovy";
             String actionFile       = actionDir + "main.groovy";
 
             tryToUpdateScript(actionName, oriActionDir, actionDir);
@@ -49,7 +47,7 @@ public class StartService {
                 return "";
             }
             // 尝试加载配置文件
-            Boolean initFileLoadState = tryToLoadInitFile(actionName, initFile, actionDir);
+            Boolean initFileLoadState = tryToLoadInitFile(actionName, initFile, oriActionDir);
             // 尝试加载脚本
             Script script = tryToLoadMainFile(actionName, mainFile, actionDir, initFileLoadState);
             Object result = script.run();
@@ -73,10 +71,10 @@ public class StartService {
      * 获取缓存中配置文件的时间
      * @param actionName
      * @param initFile
-     * @param actionDir
+     * @param oriActionDir
      * @return
      */
-    public boolean tryToLoadInitFile(String actionName, File initFile, String actionDir){
+    public boolean tryToLoadInitFile(String actionName, File initFile, String oriActionDir){
 
         String initFileNameKey = "iniFile_" + actionName;
         Long fileCacheModifyTime = getFileModifyTime(initFileNameKey);
@@ -91,7 +89,7 @@ public class StartService {
                 envService.setEnvStr(envStr);
                 Binding initBinding = new Binding();
                 initBinding.setVariable("env", envService);
-                GroovyScriptEngine engine = new GroovyScriptEngine(actionDir);
+                GroovyScriptEngine engine = new GroovyScriptEngine(oriActionDir);
                 engine.run("init.groovy", initBinding);
                 putEnv(actionName, envService);
                 putFileModifyTime(initFileNameKey, initFileModifiedTime);
@@ -110,7 +108,7 @@ public class StartService {
                 Binding initBinding = new Binding();
                 initBinding.setVariable("env", envService);
                 envService.setEnvStr(envStr);
-                GroovyScriptEngine engine = new GroovyScriptEngine(actionDir);
+                GroovyScriptEngine engine = new GroovyScriptEngine(oriActionDir);
                 engine.run("init.groovy", initBinding);
                 putEnv(actionName, envService);
                 putFileModifyTime(initFileNameKey, initFileModifiedTime);
@@ -151,7 +149,6 @@ public class StartService {
                 e.printStackTrace();
                 return null;
             }
-
         } else {
             return getScript(actionName);
         }
@@ -169,12 +166,12 @@ public class StartService {
             ArrayList<String> fileNames = new ArrayList<String>();
             fileNames.add(oriActionDir + "main.groovy");
             for (File it : files) {
-                if(it.getName().equals("main.groovy")){
+                if(it.getName().equals("main.groovy") || it.getName().equals("init.groovy")){
                     continue;
                 }
                 fileNames.add(oriScriptDir+"//"+it.getName());
             }
-            uniteFile(fileNames, actionDir + "main.groovy");
+            uniteSourceFile(fileNames, actionDir + "main.groovy","package GroovyAimScript.helloWorld\n", "packageGroovySourceScript.helloWorld");
             putFileModifyTime(scriptDirKey, scriptDirModifiedTime);
         }
     }

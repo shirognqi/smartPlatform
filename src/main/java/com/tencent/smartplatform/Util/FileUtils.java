@@ -9,18 +9,18 @@ import java.util.ArrayList;
 public class FileUtils {
 
 
-    public static String uniteFile(ArrayList<String> fileNames, String targetFileName) throws Exception {
+    public static String uniteSourceFile(ArrayList<String> fileNames, String targetFileName,String newPackageName, String oldPackageName) throws Exception {
         File inFile = null;
         File outFile = new File(targetFileName);
         FileOutputStream out = new FileOutputStream(outFile);
-        out.write("package GroovyAimScript.helloWorld\n".getBytes());
+        out.write(newPackageName.getBytes());
         for (String str:fileNames) {
             inFile = new File(str);
             FileReader in = new FileReader(inFile);
             BufferedReader bufIn = new BufferedReader(in);
             String line = null;
             while ( (line = bufIn.readLine()) != null) {
-                if(line.replaceAll("\r|[ ]","").equals("packageGroovySourceScript.helloWorld")){
+                if(line.replaceAll("\r|[ ]","").equals(oldPackageName)){
                     line = "\n";
                 }else {
                     line = line + "\n";

@@ -1,5 +1,4 @@
-package com.tencent.smartplatform.GroovySourceScript.helloWorld
-
+package dailyGroovyScript.source.helloWorld
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import com.tencent.smartplatform.Service.EnvService
 import groovy.sql.Sql

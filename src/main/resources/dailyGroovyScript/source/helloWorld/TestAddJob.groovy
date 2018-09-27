@@ -1,4 +1,4 @@
-package com.tencent.smartplatform.GroovySourceScript.helloWorld
+package dailyGroovyScript.source.helloWorld
 
 import com.tencent.smartplatform.Service.EnvService
 

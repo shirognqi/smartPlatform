@@ -1,4 +1,4 @@
-package com.tencent.smartplatform.GroovyAimScript.helloWorld
+package GroovySourceScript.helloWorld
 
 import com.tencent.smartplatform.Util.Bean.MySQLConfig
 import com.tencent.smartplatform.Util.Bean.RedisConfig
