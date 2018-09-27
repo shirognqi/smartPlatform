@@ -1,4 +1,4 @@
-package dailyGroovyScript.source.helloWorld
+package developGroovyScript.source.helloWorld
 
 import redis.clients.jedis.Jedis
 

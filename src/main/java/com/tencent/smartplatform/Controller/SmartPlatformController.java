@@ -12,15 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-public class SimpleController {
+public class SmartPlatformController {
     @Autowired
     StartService startService;
-    @RequestMapping("/hello")
+
+    @RequestMapping("/innerIndex")
     public Object index(HttpServletRequest request, HttpServletResponse response) throws ResourceException, ScriptException, IOException {
         return startService.ScriptRun(request, response);
     }
 
-    @RequestMapping("/test")
+    @RequestMapping("/index")
     public String test(){
         return "Test";
     }

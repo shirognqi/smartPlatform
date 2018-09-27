@@ -24,7 +24,7 @@ class DailyJob {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         String systime = df.format(new Date())
         redisConn.set("aaa",systime)
-        def cacheDate = redisConn.get("aaaaaa")
+        def cacheDate = redisConn.get("aaa")
         redisConn.close()
 
         def ret=[:]

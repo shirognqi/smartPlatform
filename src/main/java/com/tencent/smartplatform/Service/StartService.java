@@ -30,10 +30,8 @@ public class StartService {
             String startTime = getCurrentTime();
             Long startTimeLong = System.currentTimeMillis();
             String actionName       = "helloWorld";
-
-
-            String actionDir        = "src/main/resources/GroovyAimScript/"+actionName+"/";
-            String oriActionDir     = "src/main/resources/GroovySourceScript/"+actionName+"/";
+            String actionDir        = "src/main/resources/" +this.envStr+ "GroovyScript/aim/"+actionName+"/";
+            String oriActionDir     = "src/main/resources/" +this.envStr+ "GroovyScript/source/"+actionName+"/";
             String actionInitFile   = oriActionDir + "init.groovy";
             String actionFile       = actionDir + "main.groovy";
 
@@ -171,7 +169,10 @@ public class StartService {
                 }
                 fileNames.add(oriScriptDir+"//"+it.getName());
             }
-            uniteSourceFile(fileNames, actionDir + "main.groovy","package GroovyAimScript.helloWorld\n", "packageGroovySourceScript.helloWorld");
+
+            String aimPackageName = "package " + this.envStr+ "GroovyScript.aim." + actionName + "\n";
+            String oriPackageName = "package"  + this.envStr+ "GroovyScript.source." + actionName;
+            uniteSourceFile(fileNames, actionDir + "main.groovy",aimPackageName, oriPackageName);
             putFileModifyTime(scriptDirKey, scriptDirModifiedTime);
         }
     }

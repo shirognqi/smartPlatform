@@ -24,15 +24,23 @@
 		<java.version>1.8</java.version>
 	</properties>
     <profiles>
+        <!-- 开发环境 -->
+        <profile>
+            <id>develop</id>
+            <properties>
+                <profiles.envStr>develop</profiles.envStr>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
         <!-- 日常环境 -->
         <profile>
             <id>daily</id>
             <properties>
                 <profiles.envStr>daily</profiles.envStr>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
         </profile>
         <!-- 预发环境 -->
         <profile>

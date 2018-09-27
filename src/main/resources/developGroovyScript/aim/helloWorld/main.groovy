@@ -1,4 +1,4 @@
-package GroovyAimScript.helloWorld
+package developGroovyScript.aim.helloWorld
 
 import com.tencent.smartplatform.Service.EnvService
 
@@ -27,6 +27,7 @@ ret["envStr"] = env.getEnvStr()
 //}
 
 return ret
+
 
 import com.mchange.v2.c3p0.ComboPooledDataSource
 import com.tencent.smartplatform.Service.EnvService
