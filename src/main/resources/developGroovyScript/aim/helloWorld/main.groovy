@@ -10,7 +10,7 @@ def ret = DailyJob.instance.doSomeWork(env)
 def otherJob = TestAddJob6.instance.doOtherJob(env)
 ret["otherJob"] = otherJob
 ret["aaaaaaaa"] = "hello, smart platform"
-ret["envStr"] = env.getEnvStr()
+ret["env"] = env.getEnvStr()
 
 
 
@@ -67,7 +67,7 @@ class DailyJob {
         def databaseRet = [:]
         def i=0
         def row = sql.eachRow("SELECT * FROM t_test"){
-            databaseRet[i] = "来自于数据库的连接池aaa" + it["str"]
+            databaseRet[i] = "来自于数据库的连接池asdfasdfafdasdasdfasd" + it["str"]
             i++
         }
         sql.close()

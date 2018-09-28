@@ -16,7 +16,7 @@ class DailyJob {
         def databaseRet = [:]
         def i=0
         def row = sql.eachRow("SELECT * FROM t_test"){
-            databaseRet[i] = "来自于数据库的连接池aaa" + it["str"]
+            databaseRet[i] = "来自于数据库的连接池的数据" + it["str"]
             i++
         }
         sql.close()
