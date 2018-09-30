@@ -1,5 +1,6 @@
 package com.tencent.smartplatform.Service;
 
+import com.tencent.smartplatform.Controller.Bean.RequestObj;
 import com.tencent.smartplatform.Service.Bean.ResultSchema;
 import groovy.lang.Binding;
 import groovy.lang.MissingPropertyException;
@@ -25,7 +26,7 @@ public class StartService {
     @Value(value = "${envStr}")
     private String envStr;
 
-    public Object ScriptRun(HttpServletRequest request, HttpServletResponse response) throws ResourceException, ScriptException, IOException {
+    public Object ScriptRun(RequestObj requestObj) throws ResourceException, ScriptException, IOException {
         try {
             String startTime = getCurrentTime();
             Long startTimeLong = System.currentTimeMillis();
@@ -47,7 +48,11 @@ public class StartService {
             // 尝试加载配置文件
             Boolean initFileLoadState = tryToLoadInitFile(actionName, initFile, oriActionDir);
             // 尝试加载脚本
-            Script script = tryToLoadMainFile(actionName, mainFile, actionDir, initFileLoadState);
+            Script script = tryToLoadMainScript(actionName, mainFile, actionDir, initFileLoadState);
+
+            Binding binding = script.getBinding();
+            binding.setVariable("requestObj", requestObj);
+            script.setBinding(binding);
             Object result = script.run();
             ResultSchema resultSchema = new ResultSchema();
             resultSchema.setStartTime(startTime);
@@ -121,7 +126,7 @@ public class StartService {
     }
 
 
-    public Script tryToLoadMainFile(String actionName, File mainFile, String actionDir, Boolean initFileLoadState){
+    public Script tryToLoadMainScript(String actionName, File mainFile, String actionDir, Boolean initFileLoadState){
         String mainFileNameKey = "mainFile_" + actionName;
         Long fileCacheModifyTime = getFileModifyTime(mainFileNameKey);
         // 获取真正执行文件时间

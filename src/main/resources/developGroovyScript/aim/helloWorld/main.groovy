@@ -1,30 +1,19 @@
 package developGroovyScript.aim.helloWorld
 
+
+import com.tencent.smartplatform.Controller.Bean.RequestObj
 import com.tencent.smartplatform.Service.EnvService
 
 
 // env construction
 EnvService env = (EnvService)env
-
+RequestObj requestObj = (RequestObj)requestObj;
 def ret = DailyJob.instance.doSomeWork(env)
 def otherJob = TestAddJob6.instance.doOtherJob(env)
 ret["otherJob"] = otherJob
 ret["aaaaaaaa"] = "hello, smart platform"
 ret["env"] = env.getEnvStr()
-
-
-
-//def printThreadInfo(){
-//    Thread currentThread = Thread.currentThread()
-//    println "Current Thread is ${currentThread}"
-//}
-//printThreadInfo()
-//Thread.start{
-//    for(int i=0; i<50; i++){
-//        printThreadInfo()
-//    }
-//    return
-//}
+ret["requestObj"] = requestObj.getParams()
 
 return ret
 
@@ -67,7 +56,7 @@ class DailyJob {
         def databaseRet = [:]
         def i=0
         def row = sql.eachRow("SELECT * FROM t_test"){
-            databaseRet[i] = "来自于数据库的连接池asdfasdfafdasdasdfasd" + it["str"]
+            databaseRet[i] = "来自于数据库的连接池的数据" + it["str"]
             i++
         }
         sql.close()

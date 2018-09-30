@@ -1,5 +1,6 @@
 package com.tencent.smartplatform.Controller;
 
+import com.tencent.smartplatform.Controller.Bean.RequestObj;
 import com.tencent.smartplatform.Service.StartService;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
@@ -17,8 +18,8 @@ public class SmartPlatformController {
     StartService startService;
 
     @RequestMapping("/innerIndex")
-    public Object index(HttpServletRequest request, HttpServletResponse response) throws ResourceException, ScriptException, IOException {
-        return startService.ScriptRun(request, response);
+    public Object index(RequestObj requestObj) throws ResourceException, ScriptException, IOException {
+        return startService.ScriptRun(requestObj);
     }
 
     @RequestMapping("/index")

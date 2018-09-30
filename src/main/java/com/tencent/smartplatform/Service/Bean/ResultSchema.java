@@ -7,6 +7,15 @@ public class ResultSchema {
     String  code = "SUCCESS";
     String  message = "成功";
     Object  data;
+    String  env;
+
+    public String getEnv() {
+        return env;
+    }
+
+    public void setEnv(String env) {
+        this.env = env;
+    }
 
     public String getStartTime() {
         return startTime;
