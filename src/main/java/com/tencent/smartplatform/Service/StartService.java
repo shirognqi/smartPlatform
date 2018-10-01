@@ -58,6 +58,7 @@ public class StartService {
             resultSchema.setStartTime(startTime);
             resultSchema.setCost(System.currentTimeMillis()-startTimeLong);
             resultSchema.setData(result);
+            resultSchema.setEnv(envStr);
 
             return resultSchema;
 

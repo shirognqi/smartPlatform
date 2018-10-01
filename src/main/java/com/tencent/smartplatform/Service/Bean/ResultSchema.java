@@ -2,12 +2,13 @@ package com.tencent.smartplatform.Service.Bean;
 
 public class ResultSchema {
 
+    String  env;
     String  startTime;
     Long    cost;
     String  code = "SUCCESS";
     String  message = "成功";
     Object  data;
-    String  env;
+
 
     public String getEnv() {
         return env;

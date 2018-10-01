@@ -8,13 +8,13 @@ import java.sql.Connection
 
 @Singleton
 class ConnectionUtils {
-    def getMySQLConn(EnvService env, connectionName){
+    def static getMySQLConnPool(EnvService env, connectionName){
         ComboPooledDataSource mySQLConnectionPool = env.getMySQLPool(connectionName)
         Connection mySQLConn = mySQLConnectionPool.getConnection()
         def sql = new Sql(mySQLConn)
         return sql
     }
-    def getRediseConn(env, connectionName){
+    def static getRediseConnPool(env, connectionName){
         def redisConnectionPool = env.getRedisPool(connectionName)
         def redisConn = redisConnectionPool.getResource()
         return redisConn
