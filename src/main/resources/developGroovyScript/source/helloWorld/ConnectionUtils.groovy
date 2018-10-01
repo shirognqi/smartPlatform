@@ -1,22 +1,22 @@
 package developGroovyScript.source.helloWorld
 
-import com.mchange.v2.c3p0.ComboPooledDataSource
 import com.tencent.smartplatform.Service.EnvService
 import groovy.sql.Sql
 
 import java.sql.Connection
 
+/**
+ * 获取连接池的封装方法
+ */
 @Singleton
 class ConnectionUtils {
     def static getMySQLConnPool(EnvService env, connectionName){
-        ComboPooledDataSource mySQLConnectionPool = env.getMySQLPool(connectionName)
-        Connection mySQLConn = mySQLConnectionPool.getConnection()
+        Connection mySQLConn = env.getMySQLPool(connectionName)
         def sql = new Sql(mySQLConn)
         return sql
     }
     def static getRediseConnPool(env, connectionName){
-        def redisConnectionPool = env.getRedisPool(connectionName)
-        def redisConn = redisConnectionPool.getResource()
+        def redisConn = env.getRedisPool(connectionName)
         return redisConn
     }
 }
