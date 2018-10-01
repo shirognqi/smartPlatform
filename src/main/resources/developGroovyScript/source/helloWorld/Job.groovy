@@ -5,7 +5,7 @@ import redis.clients.jedis.Jedis
 import java.text.SimpleDateFormat
 
 @Singleton
-class DailyJob {
+class Job {
 
     def doSomeWork(env){
 

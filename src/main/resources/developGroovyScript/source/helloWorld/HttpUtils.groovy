@@ -13,7 +13,7 @@ import org.apache.http.impl.client.HttpClients
 import org.apache.http.message.BasicNameValuePair
 import org.apache.http.util.EntityUtils
 @Singleton
-class HttpUtil {
+class HttpUtils {
 
     static String doGet(String url,Map<String, String>header, Integer connTime=3000, Integer requestTime=3000,
                                Integer transferTime=3000) {

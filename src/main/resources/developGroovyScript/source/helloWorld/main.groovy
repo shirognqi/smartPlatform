@@ -2,6 +2,7 @@ package developGroovyScript.source.helloWorld
 
 import com.tencent.smartplatform.Controller.Bean.RequestObj
 import com.tencent.smartplatform.Service.EnvService
+import groovy.json.JsonSlurper
 import redis.clients.jedis.Jedis
 
 import java.text.SimpleDateFormat
@@ -46,18 +47,20 @@ ret["getCacheDataTest"] = "来自于Redis的连接池Jedis的数据：" + cacheD
 redisConn.close()
 
 // 类单例测试
-def doSomeWork = DailyJob.instance.doSomeWork(env)
+def doSomeWork = Job.instance.doSomeWork(env)
 ret["doSomeWorkTest"] = doSomeWork
 
 // JSON解析测试
-ret["jsonStr"] = "{\"state\":{\"name\":\"fulei.yang\",\"age\":\"18\"}}"
-def jsonStrParse2Obj = TestAddJob6.instance.doOtherJob("{\"state\":{\"name\":\"fulei.yang\",\"age\":\"18\"}}")
+def jsonStr = "{\"state\":{\"name\":\"smart platform\",\"developer\":\"kuanglong\"}}"
+ret["jsonStr"] = jsonStr
+def slurper = new JsonSlurper()
+def jsonStrParse2Obj = slurper.parseText(jsonStr)
 ret["jsonStrParse2ObjTest"] = jsonStrParse2Obj
 
 // http请求测试
 def header = [:]
-header["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"
-//def httpResponse = HttpUtil.doGet("http://127.0.0.1:8080/index", header,300,300,300)
-//ret["httpRequestText"] = httpResponse
+header["User-Agent"] = "Mozilla/5.0 反正是随便写的，就给个demo"
+def httpResponse = HttpUtils.doGet("http://127.0.0.1:8080/index", header,300,300,300)
+ret["httpRequestText"] = httpResponse
 
 return ret
