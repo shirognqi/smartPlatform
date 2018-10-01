@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat
 class Job {
 
     def doSomeWork(env){
-
-
         return "doSomeWork!"
     }
 }

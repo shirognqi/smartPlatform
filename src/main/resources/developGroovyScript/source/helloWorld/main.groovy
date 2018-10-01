@@ -11,6 +11,51 @@ import java.text.SimpleDateFormat
 EnvService env = (EnvService)env
 RequestObj requestObj = (RequestObj)requestObj;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // map test
 def ret = [:]
 ret["theFirstTest"] = "hello, smart platform!"
